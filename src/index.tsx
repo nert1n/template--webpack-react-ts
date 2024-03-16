@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './components/App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Suspense } from 'react';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { StrictMode, Suspense } from 'react';
 import { LazyFirst } from '@/pages/first/First.lazy';
 import './styles/style.scss';
 
@@ -13,17 +13,17 @@ if (!root) {
 
 const container = createRoot(root)
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: '/',
-        element: <App/>,
+        element: <StrictMode><App/></StrictMode>,
         children: [
             {
                 path: '/first-page',
-                element: <Suspense><LazyFirst /></Suspense>,
+                element: <Suspense fallback={'Loading...'}><LazyFirst /></Suspense>,
             },
         ]
     }
 ])
 
-container.render(<RouterProvider router={router}/>);
+container.render(<RouterProvider router={router} />);
