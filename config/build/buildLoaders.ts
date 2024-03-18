@@ -14,11 +14,6 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
 
     const cssLoadersWithModule = {
         loader: "css-loader",
-        options: {
-            modules: {
-                localIdentName: isDev ? '[path][name]__[local]' : '[local]__[hash:base64:8]',
-            },
-        },
     }
 
     const svgrLoader = {
